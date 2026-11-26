@@ -11,14 +11,12 @@
 ## Próximos pasos
 1. joaco: revisar `/muestra` y mergear el PR de #4.
 2. #5: modelo de datos (Piedra, Producto, Piedra en producto) y selector de sección en el panel.
-3. Logo en SVG: figma.com está bloqueado desde la sesión; joaco lo exporta del Figma y se sube a `public/`.
-4. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
+3. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro).
 - Ciudad desde donde envían.
 - Lista inicial de piedras con su significado (la arma la editora).
-- Archivo original del logo, si existe.
 
 ## Sesiones
 
@@ -28,7 +26,7 @@
 - Componentes en `src/components/ui/`: Button, Pill, Badge, StoneChip, ProductCard (precio con formato es-AR, "$18.500").
 - Página interna `/muestra` (noindex) para revisar todo en celular y compu. Home provisoria pasada a Tailwind.
 - Supuesto: el tema Deportes usa por ahora la misma paleta; se ajusta cuando se diseñe esa sección.
-- Logo pendiente: no se pudo bajar el SVG del Figma desde la sesión.
+- Logo: joaco pasó el SVG del Figma. Está en `public/logo.svg` y como componente `<Logo>`, que toma los colores de los tokens (texto y detalle).
 
 ### 2026-11-26 · Primer deploy y fix de registro
 - Primer deploy OK por GitHub Actions: https://austral-store.joaquinortizlongar.workers.dev
