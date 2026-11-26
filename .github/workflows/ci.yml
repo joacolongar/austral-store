@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 22
+  # Variables de entorno de prueba: el CI no usa datos reales
+  PAYLOAD_SECRET: ci-only-not-a-real-secret
+
+jobs:
+  checks:
+    name: Lint, tipos, tests y build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test:int
+      - name: Build del Worker (bindings locales, sin credenciales)
+        run: pnpm exec opennextjs-cloudflare build
+        env:
+          CF_LOCAL_BINDINGS: 'true'
+
+  deploy:
+    name: Deploy a Cloudflare
+    needs: checks
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PROD_PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+    steps:
+      - name: Verificar secretos
+        id: secrets
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ] || [ -z "$PROD_PAYLOAD_SECRET" ]; then
+            echo "::warning::Faltan CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID o PAYLOAD_SECRET en los secretos del repo. Se saltea el deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.secrets.outputs.ready != 'false'
+      - name: Verificar database_id
+        if: steps.secrets.outputs.ready != 'false'
+        run: |
+          if grep -q '"database_id": "DATABASE_ID"' wrangler.jsonc; then
+            echo "::error::wrangler.jsonc todavía tiene DATABASE_ID de ejemplo. Poné el ID real de la base D1."
+            exit 1
+          fi
+      - uses: pnpm/action-setup@v4
+        if: steps.secrets.outputs.ready != 'false'
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        if: steps.secrets.outputs.ready != 'false'
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+        if: steps.secrets.outputs.ready != 'false'
+      - name: Migrar la base D1 remota
+        if: steps.secrets.outputs.ready != 'false'
+        run: pnpm run deploy:database
+      - name: Build y deploy del Worker
+        if: steps.secrets.outputs.ready != 'false'
+        env:
+          CF_LOCAL_BINDINGS: 'true'
+        run: |
+          pnpm exec opennextjs-cloudflare build
+          pnpm exec opennextjs-cloudflare deploy
+      - name: Cargar PAYLOAD_SECRET en el Worker
+        if: steps.secrets.outputs.ready != 'false'
+        run: echo "$PROD_PAYLOAD_SECRET" | pnpm exec wrangler secret put PAYLOAD_SECRET
