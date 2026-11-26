@@ -3,15 +3,17 @@
 > Claude: leé siempre "Estado actual" y "Próximos pasos". Al cerrar sesión, reescribilos y agregá una entrada nueva arriba de "Sesiones" (la más nueva primero).
 
 ## Estado actual
-- **Fase:** 0 · Base
-- **Trabajando en:** #4 tokens de diseño y componentes base (rama `feat/4-tokens-diseno`, PR abierto). Ver `/muestra`.
-- **Bloqueos:** ninguno. Deploy a Cloudflare funcionando por GitHub Actions.
+- **Fase:** 1 · Producto
+- **Trabajando en:** #5 modelo de datos y panel por sección (rama `feat/5-modelo-datos`, PR abierto).
+- **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp.
 
 ## Próximos pasos
-1. joaco: revisar `/muestra` y mergear el PR de #4.
-2. #5: modelo de datos (Piedra, Producto, Piedra en producto) y selector de sección en el panel.
-3. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
+1. joaco: mergear el PR de #5. El deploy corre la migración en D1 y su usuario queda como admin.
+2. Compresión de fotos al subir (criterio de #5 que quedó pendiente): comprimir en el navegador antes de subir o Cloudflare Images.
+3. Crear el usuario de la editora desde el panel (Ajustes → Usuarios) y que cargue las 15 piedras.
+4. Siguiente issue del plan (#6).
+5. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro).
@@ -19,6 +21,14 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-26 · #5 Modelo de datos y panel por sección
+- Colecciones `piedras` (nombre, slug, color #hex, significado, propiedades, foto) y `productos` (sección, tipo según sección, precio, stock 1 por defecto, estado borrador/disponible/vendida, fotos, materiales, medidas, piedras con x/y en %). DEC-010.
+- Si una pieza disponible queda con stock 0 pasa sola a "vendida". Los borradores no se ven sin login.
+- Roles en usuarios: `admin` y `editora`. El primer usuario es admin; la migración deja como admin a los que ya existían. La editora no ve a otros usuarios ni puede cambiarse el rol (probado).
+- `/admin` abre en "¿Qué querés editar?": Accesorios (piezas, piedras), Deportes, Inicio y Pedidos (estos dos, próximamente). Panel en español.
+- Migración `20261126_234854_modelo_datos` probada sobre una D1 local vacía.
+- Pendiente: fotos comprimidas al subir. "Nuevo producto" desde Deportes abre con sección Accesorios por defecto (hay que cambiarla a mano).
 
 ### 2026-11-26 · #4 Tokens de diseño
 - Tailwind v4 (`@tailwindcss/postcss`). Colores como variables CSS en `:root` y tokens `@theme inline` (`bg-primario`, `text-texto`, etc.), así cada sección puede pisar las variables con `data-seccion="deportes|accesorios"` (DEC-009).

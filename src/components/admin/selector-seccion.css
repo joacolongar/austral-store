@@ -1,0 +1,85 @@
+/* Colores de la marca para el panel (mismos valores que los tokens de la web, DEC-005). */
+.selector-seccion {
+  --as-primario: #02462e;
+  --as-sobre-primario: #fffdf6;
+  --as-superficie: #e6efe9;
+  --as-detalle: #fec700;
+  padding-block: 32px 64px;
+}
+
+.selector-seccion__hola {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.selector-seccion__titulo {
+  margin: 6px 0 24px;
+}
+
+.selector-seccion__grilla {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.selector-seccion__card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--as-superficie);
+  color: var(--as-primario);
+}
+
+.selector-seccion__card h2 {
+  margin: 0;
+  color: inherit;
+}
+
+.selector-seccion__card p {
+  margin: 0 0 10px;
+}
+
+.selector-seccion__card[data-proximamente] {
+  opacity: 0.6;
+}
+
+.selector-seccion__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selector-seccion__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--as-primario);
+  color: var(--as-sobre-primario);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.selector-seccion__links a span {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--as-detalle);
+  color: var(--as-primario);
+  font-size: 12px;
+  text-align: center;
+}
+
+.selector-seccion__pronto {
+  font-size: 13px;
+  font-weight: 600;
+}
