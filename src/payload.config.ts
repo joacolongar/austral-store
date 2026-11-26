@@ -65,6 +65,10 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  // Cloudflare Workers no permite más de 100.000 iteraciones de PBKDF2 (el default de Payload es 600.000)
+  auth: {
+    passwordHashIterations: 100000,
+  },
   collections: [Users, Media],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
