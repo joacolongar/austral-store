@@ -2,6 +2,11 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-009 · Tokens con Tailwind v4 y variables CSS por sección (2026-11-26)
+- **Decisión:** Tailwind v4 con `@theme inline` apuntando a variables CSS (`--fondo`, `--primario`, …). Los temas de sección (`data-seccion`) solo redefinen esas variables. Componentes base propios en `src/components/ui/` con nombres de props en español.
+- **Por qué:** cero hex en componentes, un solo lugar para cambiar la paleta y temas por sección sin duplicar clases.
+- **Consecuencias:** shadcn/ui se suma solo cuando haga falta un componente complejo (dialog, sheet), adaptado a estos tokens.
+
 ## DEC-008 · PBKDF2 con 100.000 iteraciones (2026-11-26)
 - **Contexto:** en Cloudflare Workers, crear usuarios fallaba con `InvalidConfiguration` porque Workers no soporta las 600.000 iteraciones que usa Payload por defecto.
 - **Decisión:** `auth.passwordHashIterations: 100000` en `payload.config.ts`, el valor que Payload ofrece para este caso.
