@@ -25,15 +25,19 @@ Web de Austral Store. **Austral Store es la marca general**; adentro tiene secci
 - Pagos (fase 2): Mercado Pago Checkout Pro. Mails: Resend.
 
 ## Comandos
-> Completar cuando exista el proyecto (issue 0.2).
-- `pnpm dev` — desarrollo local
-- `pnpm lint` · `pnpm typecheck` · `pnpm test` · `pnpm build`
+- Primera vez: `pnpm install` y `cp .env.example .env` con `PAYLOAD_SECRET=$(openssl rand -hex 32)`.
+- `pnpm dev` — desarrollo en http://localhost:3000 (admin en `/admin`). Usa D1 y R2 **locales** de wrangler (`.wrangler/state`), no hace falta cuenta de Cloudflare.
+- `pnpm lint` · `pnpm typecheck` · `pnpm test:int` (Vitest) · `pnpm test:e2e` (Playwright).
+- `CF_LOCAL_BINDINGS=true pnpm exec opennextjs-cloudflare build` — compila el Worker sin credenciales (CI). Después `pnpm exec wrangler dev --local` lo corre en workerd en http://localhost:8787.
+- `pnpm deploy` — migra D1 remota y deploya el Worker (necesita `CLOUDFLARE_API_TOKEN` y los IDs reales en `wrangler.jsonc`).
+- Cambios en colecciones: `pnpm payload migrate:create` y commitear la migración en `src/migrations/`.
 - Antes de dar una tarea por terminada: lint + typecheck + tests de lo tocado.
+- Ojo: en Workers no hay `sharp`, así que Payload no recorta ni redimensiona imágenes; eso se resuelve aparte (Cloudflare Images o similar).
 
 ## Diseño
-- Figma (home y ficha del collar): https://www.figma.com/design/ZCQFJ02LtKpIJFmmNNre3I
-- Figma (paletas y logo): https://www.figma.com/design/CphdbbJsOKSldLAUiINffY
-- Paleta **Tropical**: fondo `#FFFDF6`, superficie `#E3F4EE`, texto/logo/primario petróleo `#0F3D3E`, detalle amarillo mango `#FFB627`, acento sandía `#F25F5C`, texto sobre primario `#FFFDF6`.
+- Figma de diseños (aprobado para arrancar): https://www.figma.com/design/ZCQFJ02LtKpIJFmmNNre3I — página "Base" (variables, logo, componentes) y "Diseños" (escritorio: Home, Ficha collar, Deportes catálogo y ficha, Accesorios; celular: Home y Ficha collar; panel admin: Login, Elegir sección, Accesorios productos, Nueva pieza, Editar piedra).
+- Figma de exploración de paletas (histórico): https://www.figma.com/design/CphdbbJsOKSldLAUiINffY
+- Paleta aprobada (ver DEC-005): fondo `#FFFDF6`, superficie `#E6EFE9`, texto/logo/botón principal verde `#02462E`, detalle amarillo `#FEC700` (pico y ola del logo), acento sandía `#F25F5C`, texto sobre primario `#FFFDF6`. Fuente de verdad: variables "Austral / Color" en la página "Base" del Figma.
 - Tipografías: Archivo Black (títulos), DM Sans (texto, menú, botones).
 - Estética minimalista: header flotante redondeado, cinta de anuncios, títulos numerados ("01 / La selección"), filtros pill, botones redondeados, cards limpias con badge, WhatsApp flotante.
 - Los colores van como variables CSS / tokens de Tailwind; nunca hex sueltos en componentes.
@@ -42,7 +46,8 @@ Web de Austral Store. **Austral Store es la marca general**; adentro tiene secci
 - **Piedra:** nombre, slug, significado, propiedades, color, foto.
 - **Producto:** nombre, slug, mundo (deportes | bijouterie), tipo, precio, fotos, materiales, medidas, stock (1 por defecto en bijouterie), estado (borrador | disponible | vendida).
 - **Piedra en producto:** producto + piedra + posición x/y en % sobre la foto.
-- Roles: `admin` (todo) y `editora` (productos, piedras, pedidos).
+- Roles: `admin` (todo) y `editora` (productos, piedras, pedidos). La editora puede cambiar nombre, color y significado de cada piedra.
+- Panel: al entrar se elige la sección (Accesorios, Deportes, Inicio, Pedidos) y se va a sus colecciones.
 
 ## Convenciones
 - Ramas: `feat/<issue>-<nombre>`, `fix/...`, `docs/...`.
