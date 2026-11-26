@@ -67,6 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    productos: Producto;
+    piedras: Piedra;
     users: User;
     media: Media;
     'payload-kv': PayloadKv;
@@ -76,6 +78,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    productos: ProductosSelect<false> | ProductosSelect<true>;
+    piedras: PiedrasSelect<false> | PiedrasSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -119,10 +123,111 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productos".
+ */
+export interface Producto {
+  id: number;
+  nombre: string;
+  /**
+   * Parte final del link. Se completa sola con el nombre.
+   */
+  slug?: string | null;
+  mundo: 'bijouterie' | 'deportes';
+  tipo: 'collar' | 'pulsera' | 'aros' | 'tobillera' | 'anillo' | 'indumentaria' | 'calzado' | 'accesorio-deportivo';
+  /**
+   * En pesos, sin puntos.
+   */
+  precio: number;
+  /**
+   * En accesorios suele ser 1: cada pieza es única.
+   */
+  stock: number;
+  estado: 'borrador' | 'disponible' | 'vendida';
+  /**
+   * La primera es la principal.
+   */
+  fotos: (number | Media)[];
+  descripcion?: string | null;
+  /**
+   * Ej.: hilo encerado, acero quirúrgico.
+   */
+  materiales?: string | null;
+  /**
+   * Ej.: 45 cm, regulable.
+   */
+  medidas?: string | null;
+  /**
+   * Cada piedra de la pieza y dónde está en la foto principal (en % desde arriba a la izquierda).
+   */
+  piedras?:
+    | {
+        piedra: number | Piedra;
+        x: number;
+        y: number;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Qué se ve en la foto. Ayuda a Google y a quien usa lector de pantalla.
+   */
+  alt: string;
+  _objectKey?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
+/**
+ * La guía de piedras. Lo que cargues acá se ve en la web y en cada pieza.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "piedras".
+ */
+export interface Piedra {
+  id: number;
+  nombre: string;
+  /**
+   * Parte final del link. Se completa sola con el nombre.
+   */
+  slug?: string | null;
+  /**
+   * Color del puntito que la representa, en formato #RRGGBB (ej. #9b6fc4).
+   */
+  color: string;
+  /**
+   * Qué significa o para qué se usa. Es el texto principal de la guía.
+   */
+  significado: string;
+  /**
+   * Opcional: chakra, signos, origen, dureza, cuidados…
+   */
+  propiedades?: string | null;
+  foto?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  nombre?: string | null;
+  rol: 'admin' | 'editora';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -142,24 +247,6 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  _objectKey?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -185,6 +272,14 @@ export interface PayloadKv {
 export interface PayloadLockedDocument {
   id: number;
   document?:
+    | ({
+        relationTo: 'productos';
+        value: number | Producto;
+      } | null)
+    | ({
+        relationTo: 'piedras';
+        value: number | Piedra;
+      } | null)
     | ({
         relationTo: 'users';
         value: number | User;
@@ -237,9 +332,52 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productos_select".
+ */
+export interface ProductosSelect<T extends boolean = true> {
+  nombre?: T;
+  slug?: T;
+  mundo?: T;
+  tipo?: T;
+  precio?: T;
+  stock?: T;
+  estado?: T;
+  fotos?: T;
+  descripcion?: T;
+  materiales?: T;
+  medidas?: T;
+  piedras?:
+    | T
+    | {
+        piedra?: T;
+        x?: T;
+        y?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "piedras_select".
+ */
+export interface PiedrasSelect<T extends boolean = true> {
+  nombre?: T;
+  slug?: T;
+  color?: T;
+  significado?: T;
+  propiedades?: T;
+  foto?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  nombre?: T;
+  rol?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

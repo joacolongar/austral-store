@@ -7,9 +7,12 @@ import { fileURLToPath } from 'url'
 import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
 import { r2Storage } from '@payloadcms/storage-r2'
+import { es } from '@payloadcms/translations/languages/es'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Piedras } from './collections/Piedras'
+import { Productos } from './collections/Productos'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -64,13 +67,22 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: { titleSuffix: ' · Austral Store' },
+    components: {
+      // Al entrar al panel se elige la sección a editar (Accesorios, Deportes, Inicio, Pedidos).
+      views: {
+        dashboard: { Component: '@/components/admin/SelectorSeccion#SelectorSeccion' },
+      },
+    },
   },
   // Cloudflare Workers no permite más de 100.000 iteraciones de PBKDF2 (el default de Payload es 600.000)
   auth: {
     passwordHashIterations: 100000,
   },
-  collections: [Users, Media],
+  collections: [Productos, Piedras, Users, Media],
   editor: lexicalEditor(),
+  // Panel en español (la editora lo usa desde el celular).
+  i18n: { supportedLanguages: { es }, fallbackLanguage: 'es' },
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
