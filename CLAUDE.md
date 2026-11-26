@@ -1,6 +1,6 @@
 # Austral Store — guía para Claude Code
 
-Web de Austral Store: una marca con dos mundos, **Deportes** (simple, moderno) y **Bijouterie artesanal** (piezas únicas con piedras e hilo encerado, hechas a mano). Incluye un panel `/admin` para que la editora cargue productos y piedras desde el celular.
+Web de Austral Store. **Austral Store es la marca general**; adentro tiene secciones: **Deportes** (simple, moderno) y **Accesorios / bijouterie artesanal** (piezas únicas con piedras e hilo encerado, hechas a mano). La Guía de piedras pertenece a la sección de accesorios, no a la marca general. Incluye un panel `/admin` que al entrar deja elegir qué sección se va a editar y lleva a sus colecciones; la editora lo usa desde el celular.
 
 ## Idioma y forma de trabajar
 - Hablá en español rioplatense. Código, nombres de variables y commits técnicos pueden ir en inglés; textos de la web en español.
