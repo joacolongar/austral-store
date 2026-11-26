@@ -24,6 +24,7 @@
 ### 2026-11-26 · Primer deploy y fix de registro
 - Primer deploy OK por GitHub Actions: https://austral-store.joaquinortizlongar.workers.dev
 - Crear el primer usuario daba 500 (`InvalidConfiguration`): Payload usa 600.000 iteraciones de PBKDF2 y Cloudflare Workers acepta como máximo 100.000. En local (workerd) no falla, por eso no se vio antes. Fix: `auth.passwordHashIterations: 100000` (DEC-008).
+- Un deploy falló en el build con `SQLITE_BUSY`: los 3 workers de Next abrían la misma D1 local a la vez. Con `CF_LOCAL_BINDINGS=true` el build usa 1 solo worker (`next.config.ts`).
 - Logs en vivo: Cloudflare → Workers & Pages → austral-store → Observability → Live.
 
 ### 2026-11-26 · #2 Prototipo del stack
