@@ -21,6 +21,11 @@
 
 ## Sesiones
 
+### 2026-11-26 · Primer deploy y fix de registro
+- Primer deploy OK por GitHub Actions: https://austral-store.joaquinortizlongar.workers.dev
+- Crear el primer usuario daba 500 (`InvalidConfiguration`): Payload usa 600.000 iteraciones de PBKDF2 y Cloudflare Workers acepta como máximo 100.000. En local (workerd) no falla, por eso no se vio antes. Fix: `auth.passwordHashIterations: 100000` (DEC-008).
+- Logs en vivo: Cloudflare → Workers & Pages → austral-store → Observability → Live.
+
 ### 2026-11-26 · #2 Prototipo del stack
 - Proyecto generado desde la plantilla oficial `with-cloudflare-d1` de Payload 3.94.1 (Next 16.4, React 19.2).
 - Probado: `pnpm dev`, login en `/admin`, subida de foto a R2 local, home pública que lista las fotos. También el Worker compilado con OpenNext corriendo en workerd (`wrangler dev --local`), incluida una subida.

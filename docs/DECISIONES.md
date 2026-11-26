@@ -2,6 +2,11 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-008 · PBKDF2 con 100.000 iteraciones (2026-11-26)
+- **Contexto:** en Cloudflare Workers, crear usuarios fallaba con `InvalidConfiguration` porque Workers no soporta las 600.000 iteraciones que usa Payload por defecto.
+- **Decisión:** `auth.passwordHashIterations: 100000` en `payload.config.ts`, el valor que Payload ofrece para este caso.
+- **Consecuencias:** no hay usuarios previos, así que no hace falta migrar contraseñas.
+
 ## DEC-007 · Cloudflare Workers Paid (2026-11-26)
 - **Contexto:** el Worker compilado pesa 3,7 MB con gzip y el plan gratis de Workers permite 3 MB.
 - **Decisión:** joaco activó Workers Paid (USD 5/mes, límite 10 MB).
