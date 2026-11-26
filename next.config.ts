@@ -13,7 +13,10 @@ const nextConfig: NextConfig = {
   // Read more: https://opennext.js.org/cloudflare/howtos/workerd
   serverExternalPackages: ['jose', 'pg-cloudflare'],
 
-  // Your Next.js config here
+  // Con bindings locales (CI), varios workers de "Collecting page data" abren la misma
+  // D1 local de wrangler y SQLite se traba (SQLITE_BUSY). Un solo worker lo evita.
+  ...(process.env.CF_LOCAL_BINDINGS === 'true' ? { experimental: { cpus: 1 } } : {}),
+
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
