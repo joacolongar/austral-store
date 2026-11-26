@@ -1,78 +1,67 @@
-/* Paleta aprobada en Figma, provisoria; el sistema de tokens real llega en el issue #4. */
+@import 'tailwindcss';
+
+/*
+ * Tokens de diseño de Austral Store.
+ * Fuente de verdad: colección "Austral / Color" de la página "Base" del Figma
+ * (https://www.figma.com/design/ZCQFJ02LtKpIJFmmNNre3I). Ver DEC-005.
+ * Los componentes usan SOLO estos tokens (bg-primario, text-texto, etc.), nunca hex sueltos.
+ */
+
 :root {
   --fondo: #fffdf6;
   --superficie: #e6efe9;
+  --texto: #02462e;
   --primario: #02462e;
+  --sobre-primario: #fffdf6;
   --detalle: #fec700;
   --acento: #f25f5c;
-  --sobre-primario: #fffdf6;
+  --sobre-acento: #ffffff;
 }
 
-* {
-  box-sizing: border-box;
+/*
+ * Temas por sección. Hoy comparten la paleta aprobada; cuando el diseño defina
+ * variaciones (por ejemplo un acento propio para Deportes) se cambian solo acá.
+ */
+[data-seccion='deportes'],
+[data-seccion='accesorios'] {
+  --primario: #02462e;
+  --acento: #f25f5c;
 }
 
-body {
-  margin: 0;
-  background: var(--fondo);
-  color: var(--primario);
-  font-family: system-ui, sans-serif;
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-texto: var(--texto);
+  --color-primario: var(--primario);
+  --color-sobre-primario: var(--sobre-primario);
+  --color-detalle: var(--detalle);
+  --color-acento: var(--acento);
+  --color-sobre-acento: var(--sobre-acento);
+
+  --font-display: var(--font-archivo-black), 'Archivo Black', system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
 }
 
-.home {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 48px 16px;
+@theme {
+  --radius-card: 20px;
+  --radius-foto: 14px;
+  --tracking-pill: 0.06em;
+  --tracking-etiqueta: 0.12em;
 }
 
-.hero h1 {
-  margin: 0 0 8px;
-  font-size: clamp(40px, 8vw, 72px);
-  letter-spacing: -0.02em;
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-.eyebrow {
-  margin: 0;
-  color: var(--acento);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+  }
 
-.button {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 12px 24px;
-  border-radius: 999px;
-  background: var(--primario);
-  color: var(--sobre-primario);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.card {
-  margin: 0;
-  overflow: hidden;
-  border-radius: 16px;
-  background: var(--superficie);
-}
-
-.card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-}
-
-.card figcaption {
-  padding: 12px;
-  font-size: 14px;
+  :focus-visible {
+    outline: 2px solid var(--color-detalle);
+    outline-offset: 2px;
+  }
 }

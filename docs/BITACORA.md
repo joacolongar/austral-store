@@ -4,14 +4,15 @@
 
 ## Estado actual
 - **Fase:** 0 · Base
-- **Trabajando en:** #2 (PR #14, validado en local) y #3 (CI + deploy por GitHub Actions). Falta el primer deploy real.
-- **Bloqueos:** faltan los secretos de GitHub `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` y `PAYLOAD_SECRET`. Ya están: Workers Paid, D1 `austral-store` (ID en `wrangler.jsonc`) y R2 `austral-store-media`.
+- **Trabajando en:** #4 tokens de diseño y componentes base (rama `feat/4-tokens-diseno`, PR abierto). Ver `/muestra`.
+- **Bloqueos:** ninguno. Deploy a Cloudflare funcionando por GitHub Actions.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp.
 
 ## Próximos pasos
-1. joaco: terminar el API token y cargar los 3 secretos en GitHub. Después mergear #15: el workflow migra D1 y deploya al hacer push a `main`.
-2. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
-3. #4: tokens de diseño con la paleta de DEC-005 y las variables "Austral / Color" del Figma.
+1. joaco: revisar `/muestra` y mergear el PR de #4.
+2. #5: modelo de datos (Piedra, Producto, Piedra en producto) y selector de sección en el panel.
+3. Logo en SVG: figma.com está bloqueado desde la sesión; joaco lo exporta del Figma y se sube a `public/`.
+4. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro).
@@ -20,6 +21,14 @@
 - Archivo original del logo, si existe.
 
 ## Sesiones
+
+### 2026-11-26 · #4 Tokens de diseño
+- Tailwind v4 (`@tailwindcss/postcss`). Colores como variables CSS en `:root` y tokens `@theme inline` (`bg-primario`, `text-texto`, etc.), así cada sección puede pisar las variables con `data-seccion="deportes|accesorios"` (DEC-009).
+- Fuentes con `next/font/google`: Archivo Black (`font-display`) y DM Sans (`font-sans`).
+- Componentes en `src/components/ui/`: Button, Pill, Badge, StoneChip, ProductCard (precio con formato es-AR, "$18.500").
+- Página interna `/muestra` (noindex) para revisar todo en celular y compu. Home provisoria pasada a Tailwind.
+- Supuesto: el tema Deportes usa por ahora la misma paleta; se ajusta cuando se diseñe esa sección.
+- Logo pendiente: no se pudo bajar el SVG del Figma desde la sesión.
 
 ### 2026-11-26 · Primer deploy y fix de registro
 - Primer deploy OK por GitHub Actions: https://austral-store.joaquinortizlongar.workers.dev

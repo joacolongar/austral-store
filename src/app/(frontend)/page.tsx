@@ -1,11 +1,10 @@
-import Link from 'next/link'
 import { getPayload } from 'payload'
 import React from 'react'
 
+import { Button } from '@/components/ui'
 import config from '@/payload.config'
-import './styles.css'
 
-// Prototipo del issue #2: prueba que lo que se sube desde /admin (D1 + R2) se ve en una página pública.
+// Home provisoria (la real llega en #7): muestra las fotos que se suben desde /admin.
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
@@ -13,24 +12,33 @@ export default async function HomePage() {
   const media = await payload.find({ collection: 'media', limit: 12, sort: '-createdAt' })
 
   return (
-    <main className="home">
-      <header className="hero">
-        <p className="eyebrow">Prototipo</p>
-        <h1>Austral Store</h1>
-        <p>Las fotos que se suben desde el panel aparecen acá.</p>
-        <Link className="button" href="/admin">
+    <main className="mx-auto max-w-6xl px-4 py-12 sm:px-8">
+      <header>
+        <p className="text-xs font-semibold tracking-etiqueta text-acento uppercase">Prototipo</p>
+        <h1 className="mt-2 font-display text-5xl leading-none uppercase sm:text-7xl">
+          Austral Store
+        </h1>
+        <p className="mt-3">Las fotos que se suben desde el panel aparecen acá.</p>
+        <Button className="mt-5" href="/admin">
           Ir al panel
-        </Link>
+        </Button>
       </header>
 
-      <section className="grid" aria-label="Últimas fotos">
+      <section
+        aria-label="Últimas fotos"
+        className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
+      >
         {media.docs.length === 0 && <p>Todavía no hay fotos. Subí una desde el panel.</p>}
         {media.docs.map((doc) =>
           doc.url ? (
-            <figure className="card" key={doc.id}>
+            <figure className="overflow-hidden rounded-card bg-superficie p-3" key={doc.id}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt={doc.alt} src={doc.url} />
-              <figcaption>{doc.alt}</figcaption>
+              <img
+                alt={doc.alt}
+                className="aspect-square w-full rounded-foto object-cover"
+                src={doc.url}
+              />
+              <figcaption className="pt-2.5 text-sm">{doc.alt}</figcaption>
             </figure>
           ) : null,
         )}
