@@ -2,6 +2,11 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-007 · Cloudflare Workers Paid (2026-11-26)
+- **Contexto:** el Worker compilado pesa 3,7 MB con gzip y el plan gratis de Workers permite 3 MB.
+- **Decisión:** joaco activó Workers Paid (USD 5/mes, límite 10 MB).
+- **Descartadas:** Vercel + Neon, porque Vercel Hobby no permite uso comercial y Pro cuesta USD 20/mes.
+
 ## DEC-006 · Stack validado: Payload sobre Cloudflare Workers + D1 + R2 (2026-11-26)
 - **Contexto:** DEC-001 pedía validar el stack antes de construir producto (#2).
 - **Resultado:** con la plantilla oficial `with-cloudflare-d1` de Payload 3.94, el Worker compilado con OpenNext corre en workerd local: `/admin` carga, una foto se sube a R2, queda registrada en D1 y se ve en la home pública. Falta solo el deploy real con la cuenta de Cloudflare.

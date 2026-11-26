@@ -18,7 +18,7 @@
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "DATABASE_ID",
+      "database_id": "eb1ae2a6-0e72-4e54-bb46-ef8caa7a1348",
       "database_name": "austral-store",
       "remote": true,
     },
@@ -50,7 +50,7 @@
   //     "d1_databases": [
   //       {
   //         "binding": "D1",
-  //         "database_id": "DATABASE_ID",
+  //         "database_id": "eb1ae2a6-0e72-4e54-bb46-ef8caa7a1348",
   //         "database_name": "my-app-staging",
   //         "remote": true
   //       }
