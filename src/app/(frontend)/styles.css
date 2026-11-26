@@ -1,0 +1,78 @@
+/* Paleta aprobada en Figma, provisoria; el sistema de tokens real llega en el issue #4. */
+:root {
+  --fondo: #fffdf6;
+  --superficie: #e6efe9;
+  --primario: #02462e;
+  --detalle: #fec700;
+  --acento: #f25f5c;
+  --sobre-primario: #fffdf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--primario);
+  font-family: system-ui, sans-serif;
+}
+
+.home {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(40px, 8vw, 72px);
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--acento);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--primario);
+  color: var(--sobre-primario);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--superficie);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card figcaption {
+  padding: 12px;
+  font-size: 14px;
+}
