@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 
-import { Button, Pill, ProductCard, StoneChip } from '@/components/ui'
+import { Button, Logo, Pill, ProductCard, StoneChip } from '@/components/ui'
 
 const filtros = ['Todo', 'Collares', 'Pulseras', 'Aros', 'Tobilleras']
 
@@ -58,7 +58,8 @@ export function Demo() {
         </ul>
       </Seccion>
 
-      <Seccion numero="02" titulo="Tipografías">
+      <Seccion numero="02" titulo="Logo y tipografías">
+        <Logo className="w-56 sm:w-80" />
         <p className="font-display text-4xl leading-none uppercase sm:text-6xl">Austral Store</p>
         <p className="max-w-prose text-base">
           DM Sans para menú, botones y textos. Archivo Black para títulos, con el peso del logo.

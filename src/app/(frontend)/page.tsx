@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import React from 'react'
 
-import { Button } from '@/components/ui'
+import { Button, Logo } from '@/components/ui'
 import config from '@/payload.config'
 
 // Home provisoria (la real llega en #7): muestra las fotos que se suben desde /admin.
@@ -15,8 +15,8 @@ export default async function HomePage() {
     <main className="mx-auto max-w-6xl px-4 py-12 sm:px-8">
       <header>
         <p className="text-xs font-semibold tracking-etiqueta text-acento uppercase">Prototipo</p>
-        <h1 className="mt-2 font-display text-5xl leading-none uppercase sm:text-7xl">
-          Austral Store
+        <h1 className="mt-3">
+          <Logo className="w-64 sm:w-96" />
         </h1>
         <p className="mt-3">Las fotos que se suben desde el panel aparecen acá.</p>
         <Button className="mt-5" href="/admin">
