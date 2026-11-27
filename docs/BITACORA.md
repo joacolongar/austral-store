@@ -12,8 +12,8 @@
 1. joaco: mergear el PR de #5. El deploy corre la migración en D1 y su usuario queda como admin.
 2. Compresión de fotos al subir (criterio de #5 que quedó pendiente): comprimir en el navegador antes de subir o Cloudflare Images.
 3. Crear el usuario de la editora desde el panel (Ajustes → Usuarios) y que cargue las 15 piedras.
-4. Siguiente issue del plan (#6).
-5. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
+3. Siguiente issue del plan (#6).
+4. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro).
@@ -28,7 +28,8 @@
 - Roles en usuarios: `admin` y `editora`. El primer usuario es admin; la migración deja como admin a los que ya existían. La editora no ve a otros usuarios ni puede cambiarse el rol (probado).
 - `/admin` abre en "¿Qué querés editar?": Accesorios (piezas, piedras), Deportes, Inicio y Pedidos (estos dos, próximamente). Panel en español.
 - Migración `20261126_234854_modelo_datos` probada sobre una D1 local vacía.
-- Pendiente: fotos comprimidas al subir. "Nuevo producto" desde Deportes abre con sección Accesorios por defecto (hay que cambiarla a mano).
+- Fotos comprimidas al subir con el binding de Cloudflare Images (`IMAGES`): lado máximo 2000 px y WebP calidad 80. Si falla, se guarda la original. Probado en local: JPG de 3,9 MB → WebP de 0,9 MB (DEC-011).
+- Pendiente: "Nuevo producto" desde Deportes abre con sección Accesorios por defecto (hay que cambiarla a mano).
 
 ### 2026-11-26 · #4 Tokens de diseño
 - Tailwind v4 (`@tailwindcss/postcss`). Colores como variables CSS en `:root` y tokens `@theme inline` (`bg-primario`, `text-texto`, etc.), así cada sección puede pisar las variables con `data-seccion="deportes|accesorios"` (DEC-009).

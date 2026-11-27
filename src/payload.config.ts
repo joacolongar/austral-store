@@ -10,7 +10,7 @@ import { r2Storage } from '@payloadcms/storage-r2'
 import { es } from '@payloadcms/translations/languages/es'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { crearMedia } from './collections/Media'
 import { Piedras } from './collections/Piedras'
 import { Productos } from './collections/Productos'
 
@@ -79,7 +79,7 @@ export default buildConfig({
   auth: {
     passwordHashIterations: 100000,
   },
-  collections: [Productos, Piedras, Users, Media],
+  collections: [Productos, Piedras, Users, crearMedia(cloudflare.env.IMAGES)],
   editor: lexicalEditor(),
   // Panel en español (la editora lo usa desde el celular).
   i18n: { supportedLanguages: { es }, fallbackLanguage: 'es' },

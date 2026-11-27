@@ -2,10 +2,15 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-011 · Compresión de fotos con Cloudflare Images (2026-11-27)
+- **Decisión:** hook `beforeOperation` en `media` que pasa cada foto por el binding `IMAGES` de Cloudflare Images: máximo 2000 px de lado, WebP calidad 80. Se guarda solo la versión comprimida en R2.
+- **Alternativas:** comprimir en el navegador (frágil con el uploader de Payload), WASM en el Worker (pesa y suma CPU), sharp (no corre en Workers).
+- **Consecuencias:** el plan gratis de Images incluye 5.000 transformaciones por mes, de sobra para la carga de productos. Si el binding falla, la subida no se corta: queda la original. Los tamaños por pantalla (miniaturas) se pueden sumar después con transformaciones por URL.
+
 ## DEC-010 · Piedras en producto como lista dentro del producto (2026-11-26)
 - **Decisión:** "Piedra en producto" es un campo lista (`piedras`: piedra + x/y en %) dentro de Producto, no una colección aparte. Panel en español, roles `admin`/`editora` en el usuario (el primero siempre es admin) y pantalla de entrada propia (`SelectorSeccion`) en lugar del dashboard de Payload.
 - **Por qué:** la editora marca las piedras en la misma pantalla de la pieza, sin saltar entre colecciones; los datos quedan igual de consultables.
-- **Consecuencias:** si algún día una piedra necesita datos propios por pieza (tamaño, cantidad), se agregan como campos de la fila. Compresión de fotos sigue pendiente (en Workers no hay sharp).
+- **Consecuencias:** si algún día una piedra necesita datos propios por pieza (tamaño, cantidad), se agregan como campos de la fila. Compresión de fotos: ver DEC-011.
 
 ## DEC-009 · Tokens con Tailwind v4 y variables CSS por sección (2026-11-26)
 - **Decisión:** Tailwind v4 con `@theme inline` apuntando a variables CSS (`--fondo`, `--primario`, …). Los temas de sección (`data-seccion`) solo redefinen esas variables. Componentes base propios en `src/components/ui/` con nombres de props en español.
