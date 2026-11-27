@@ -4,15 +4,16 @@
 
 ## Estado actual
 - **Fase:** 1 · Catálogo
-- **Trabajando en:** #6 layout común (rama `feat/6-layout`, PR abierto).
+- **Trabajando en:** #7 home de marca (rama `feat/7-home`, PR abierto). #6 mergeado.
 - **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: mergear el PR de #6 y cargar los anuncios de la cinta en el panel (Inicio → Editar inicio). Sin anuncios la cinta no aparece.
-2. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue las 15 piedras.
-3. #7 Home de marca.
-4. Quedan de la Fase 1: #7 a #12. De la Fase 0, el preview por PR dentro de #3.
+1. joaco: mergear el PR de #7. El deploy carga 3 frases genéricas en la cinta (si está vacía) y suma las fotos de campaña en Inicio.
+2. Cargar las fotos de campaña (Inicio → Editar inicio) y algunos productos para que la home se vea completa.
+3. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue las 15 piedras.
+4. #8 Catálogo y ficha de Deportes.
+5. Quedan de la Fase 1: #8 a #12. De la Fase 0, el preview por PR dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro). Con el dominio se suma el email de contacto al footer.
@@ -20,6 +21,13 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-27 · #7 Home de marca
+- Hero con dos bloques (Accesorios amarillo, Deportes verde) según el Figma, con foto de campaña editable en Inicio (`fotoAccesorios`, `fotoDeportes`). Sin foto muestra el placeholder.
+- "03 / Novedades": hasta 8 productos publicados, primero los `destacado` (checkbox nuevo en Productos) y después los más nuevos, con filtros Todo / Accesorios / Deportes. Badge: "Pieza única" en accesorios, "Nuevo" en deportes de menos de 30 días, "Vendida" si corresponde. Los borradores no aparecen.
+- Componente `TituloSeccion` para los títulos numerados y variante `detalle` (amarilla) en `Button`.
+- Frases genéricas de la cinta (pedido de joaco): migración `20261127_183000_frases_cinta`, solo si la cinta está vacía. Las promesas comerciales (envío gratis, cuotas) se definen más adelante.
+- Los links de las cards apuntan a `/accesorios/<slug>` y `/deportes/<slug>` (llegan con #8 y #9).
 
 ### 2026-11-27 · #6 Layout común
 - Cinta de anuncios editable desde el panel: global `inicio` (sección Inicio del selector) con hasta 6 frases. En compu se ven todas; en celular rotan cada 4 s. Sin frases no se muestra.

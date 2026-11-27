@@ -13,6 +13,25 @@ export const Inicio: GlobalConfig = {
   },
   fields: [
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'fotoAccesorios',
+          label: 'Foto de campaña · Accesorios',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Foto del bloque amarillo de la home.' },
+        },
+        {
+          name: 'fotoDeportes',
+          label: 'Foto de campaña · Deportes',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Foto del bloque verde de la home.' },
+        },
+      ],
+    },
+    {
       name: 'anuncios',
       label: 'Cinta de anuncios',
       labels: { singular: 'Anuncio', plural: 'Anuncios' },
