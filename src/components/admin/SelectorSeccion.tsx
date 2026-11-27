@@ -45,8 +45,7 @@ export async function SelectorSeccion({ initPageResult }: AdminViewServerProps) 
     {
       titulo: 'Inicio',
       bajada: 'Cinta de anuncios y destacados de la home',
-      destinos: [],
-      proximamente: true,
+      destinos: [{ texto: 'Editar inicio', href: '/admin/globals/inicio' }],
     },
     { titulo: 'Pedidos', bajada: 'Compras y consultas', destinos: [], proximamente: true },
   ]
