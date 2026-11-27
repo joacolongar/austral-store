@@ -30,6 +30,10 @@
     //   "service": "my-app"
     // },
   ],
+  // Cloudflare Images: comprime y pasa a WebP las fotos al subirlas (src/collections/comprimirFoto.ts).
+  "images": {
+    "binding": "IMAGES",
+  },
   "r2_buckets": [
     {
       "binding": "R2",

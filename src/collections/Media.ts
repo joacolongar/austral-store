@@ -1,11 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
 import { logueado } from '../access'
+import { comprimirFoto } from './comprimirFoto'
 
-export const Media: CollectionConfig = {
+/** `images` es el binding de Cloudflare Images (ver wrangler.jsonc). */
+export const crearMedia = (images?: ImagesBinding): CollectionConfig => ({
   slug: 'media',
   labels: { singular: 'Foto', plural: 'Fotos' },
   admin: { group: 'Ajustes' },
+  hooks: { beforeOperation: [comprimirFoto(images)] },
   access: {
     read: () => true,
     create: logueado,
@@ -29,4 +32,4 @@ export const Media: CollectionConfig = {
     focalPoint: false,
     mimeTypes: ['image/*'],
   },
-}
+})
