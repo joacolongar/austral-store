@@ -13,6 +13,7 @@ import { Users } from './collections/Users'
 import { crearMedia } from './collections/Media'
 import { Piedras } from './collections/Piedras'
 import { Productos } from './collections/Productos'
+import { Inicio } from './globals/Inicio'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -80,6 +81,7 @@ export default buildConfig({
     passwordHashIterations: 100000,
   },
   collections: [Productos, Piedras, Users, crearMedia(cloudflare.env.IMAGES)],
+  globals: [Inicio],
   editor: lexicalEditor(),
   // Panel en español (la editora lo usa desde el celular).
   i18n: { supportedLanguages: { es }, fallbackLanguage: 'es' },

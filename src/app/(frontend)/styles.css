@@ -16,6 +16,8 @@
   --detalle: #fec700;
   --acento: #f25f5c;
   --sobre-acento: #ffffff;
+  /* Color de marca de WhatsApp, solo para el botón flotante. */
+  --whatsapp: #25d366;
 }
 
 /*
@@ -37,6 +39,7 @@
   --color-detalle: var(--detalle);
   --color-acento: var(--acento);
   --color-sobre-acento: var(--sobre-acento);
+  --color-whatsapp: var(--whatsapp);
 
   --font-display: var(--font-archivo-black), 'Archivo Black', system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
@@ -45,6 +48,10 @@
 @theme {
   --radius-card: 20px;
   --radius-foto: 14px;
+  --radius-header: 22px;
+  --radius-header-movil: 18px;
+  --tracking-menu: 0.06em;
+  --tracking-cinta: 0.1em;
   --tracking-pill: 0.06em;
   --tracking-etiqueta: 0.12em;
 }

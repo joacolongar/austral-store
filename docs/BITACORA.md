@@ -3,24 +3,31 @@
 > Claude: leé siempre "Estado actual" y "Próximos pasos". Al cerrar sesión, reescribilos y agregá una entrada nueva arriba de "Sesiones" (la más nueva primero).
 
 ## Estado actual
-- **Fase:** 1 · Producto
-- **Trabajando en:** #5 modelo de datos y panel por sección (rama `feat/5-modelo-datos`, PR abierto).
+- **Fase:** 1 · Catálogo
+- **Trabajando en:** #6 layout común (rama `feat/6-layout`, PR abierto).
 - **Bloqueos:** ninguno.
-- **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp.
+- **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: mergear el PR de #5. El deploy corre la migración en D1 y su usuario queda como admin.
-2. Compresión de fotos al subir (criterio de #5 que quedó pendiente): comprimir en el navegador antes de subir o Cloudflare Images.
-3. Crear el usuario de la editora desde el panel (Ajustes → Usuarios) y que cargue las 15 piedras.
-3. Siguiente issue del plan (#6).
-4. Preview por PR (`wrangler versions upload --preview-alias`), pendiente dentro de #3.
+1. joaco: mergear el PR de #6 y cargar los anuncios de la cinta en el panel (Inicio → Editar inicio). Sin anuncios la cinta no aparece.
+2. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue las 15 piedras.
+3. #7 Home de marca.
+4. Quedan de la Fase 1: #7 a #12. De la Fase 0, el preview por PR dentro de #3.
 
 ## Pendientes de joaco
-- Dominio elegido (australstore.com.ar / austral.store / otro).
+- Dominio elegido (australstore.com.ar / austral.store / otro). Con el dominio se suma el email de contacto al footer.
 - Ciudad desde donde envían.
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-27 · #6 Layout común
+- Cinta de anuncios editable desde el panel: global `inicio` (sección Inicio del selector) con hasta 6 frases. En compu se ven todas; en celular rotan cada 4 s. Sin frases no se muestra.
+- Header flotante sticky (Tienda ▾ con Accesorios, Guía de piedras y Deportes; Buscar, Cuenta, Bolsa) y menú desplegable en celular. Footer en 4 columnas (compu) y compacto (celular). Botón flotante de WhatsApp (wa.me/5492665011054 con mensaje inicial).
+- Datos de contacto y navegación en `src/config/marca.ts`. El layout público es dinámico (`force-dynamic`) porque lee la cinta de la base.
+- Los links del menú y del footer apuntan a páginas que llegan con #7–#12 (hoy dan 404). El email del footer se oculta hasta tener dominio.
+- Migración `20261127_181034_cinta_anuncios`.
+- Cierre de #5 (sesión anterior): PRs #20 y #21 mergeados y deployados. Fotos comprimidas con Cloudflare Images (DEC-011).
 
 ### 2026-11-26 · #5 Modelo de datos y panel por sección
 - Colecciones `piedras` (nombre, slug, color #hex, significado, propiedades, foto) y `productos` (sección, tipo según sección, precio, stock 1 por defecto, estado borrador/disponible/vendida, fotos, materiales, medidas, piedras con x/y en %). DEC-010.
