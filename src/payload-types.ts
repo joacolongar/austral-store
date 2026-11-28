@@ -59,145 +59,154 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | 'Pacific/Fiji'
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
-  };
-  blocks: {};
+    users: UserAuthOperations
+  }
+  blocks: {}
   collections: {
-    productos: Producto;
-    piedras: Piedra;
-    users: User;
-    media: Media;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
-  collectionsJoins: {};
+    productos: Producto
+    piedras: Piedra
+    users: User
+    media: Media
+    'payload-kv': PayloadKv
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
+  collectionsJoins: {}
   collectionsSelect: {
-    productos: ProductosSelect<false> | ProductosSelect<true>;
-    piedras: PiedrasSelect<false> | PiedrasSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    productos: ProductosSelect<false> | ProductosSelect<true>
+    piedras: PiedrasSelect<false> | PiedrasSelect<true>
+    users: UsersSelect<false> | UsersSelect<true>
+    media: MediaSelect<false> | MediaSelect<true>
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
+    'payload-locked-documents':
+      PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
+  }
   db: {
-    defaultIDType: number;
-  };
-  fallbackLocale: null;
+    defaultIDType: number
+  }
+  fallbackLocale: null
   globals: {
-    inicio: Inicio;
-  };
+    inicio: Inicio
+  }
   globalsSelect: {
-    inicio: InicioSelect<false> | InicioSelect<true>;
-  };
-  locale: null;
+    inicio: InicioSelect<false> | InicioSelect<true>
+  }
+  locale: null
   widgets: {
-    collections: CollectionsWidget;
-  };
-  user: User;
+    collections: CollectionsWidget
+  }
+  user: User
   jobs: {
-    tasks: unknown;
-    workflows: unknown;
-  };
+    tasks: unknown
+    workflows: unknown
+  }
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   login: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   registerFirstUser: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   unlock: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "productos".
  */
 export interface Producto {
-  id: number;
-  nombre: string;
+  id: number
+  nombre: string
   /**
    * Parte final del link. Se completa sola con el nombre.
    */
-  slug?: string | null;
-  mundo: 'bijouterie' | 'deportes';
-  tipo: 'collar' | 'pulsera' | 'aros' | 'tobillera' | 'anillo' | 'indumentaria' | 'calzado' | 'accesorio-deportivo';
+  slug?: string | null
+  mundo: 'bijouterie' | 'deportes'
+  tipo:
+    | 'collar'
+    | 'pulsera'
+    | 'aros'
+    | 'tobillera'
+    | 'anillo'
+    | 'indumentaria'
+    | 'calzado'
+    | 'accesorio-deportivo'
   /**
    * En pesos, sin puntos.
    */
-  precio: number;
+  precio: number
   /**
    * En accesorios suele ser 1: cada pieza es única.
    */
-  stock: number;
-  estado: 'borrador' | 'disponible' | 'vendida';
+  stock: number
+  estado: 'borrador' | 'disponible' | 'vendida'
   /**
    * Aparece primero en las novedades de la home.
    */
-  destacado?: boolean | null;
+  destacado?: boolean | null
   /**
    * La primera es la principal.
    */
-  fotos: (number | Media)[];
-  descripcion?: string | null;
+  fotos: (number | Media)[]
+  descripcion?: string | null
   /**
    * Ej.: hilo encerado, acero quirúrgico.
    */
-  materiales?: string | null;
+  materiales?: string | null
   /**
    * Ej.: 45 cm, regulable.
    */
-  medidas?: string | null;
+  medidas?: string | null
   /**
    * Cada piedra de la pieza y dónde está en la foto principal (en % desde arriba a la izquierda).
    */
   piedras?:
     | {
-        piedra: number | Piedra;
-        x: number;
-        y: number;
-        id?: string | null;
+        piedra: number | Piedra
+        x: number
+        y: number
+        id?: string | null
       }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: number
   /**
    * Qué se ve en la foto. Ayuda a Google y a quien usa lector de pantalla.
    */
-  alt: string;
-  _objectKey?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
+  alt: string
+  _objectKey?: string | null
+  updatedAt: string
+  createdAt: string
+  url?: string | null
+  thumbnailURL?: string | null
+  filename?: string | null
+  mimeType?: string | null
+  filesize?: number | null
+  width?: number | null
+  height?: number | null
 }
 /**
  * La guía de piedras. Lo que cargues acá se ve en la web y en cada pieza.
@@ -206,304 +215,304 @@ export interface Media {
  * via the `definition` "piedras".
  */
 export interface Piedra {
-  id: number;
-  nombre: string;
+  id: number
+  nombre: string
   /**
    * Parte final del link. Se completa sola con el nombre.
    */
-  slug?: string | null;
+  slug?: string | null
   /**
    * Color del puntito que la representa, en formato #RRGGBB (ej. #9b6fc4).
    */
-  color: string;
+  color: string
   /**
    * Qué significa o para qué se usa. Es el texto principal de la guía.
    */
-  significado: string;
+  significado: string
   /**
    * Opcional: chakra, signos, origen, dureza, cuidados…
    */
-  propiedades?: string | null;
-  foto?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
+  propiedades?: string | null
+  foto?: (number | null) | Media
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
-  nombre?: string | null;
-  rol: 'admin' | 'editora';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
+  id: number
+  nombre?: string | null
+  rol: 'admin' | 'editora'
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  resetPasswordRequestedAt?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
   sessions?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        id: string
+        createdAt?: string | null
+        expiresAt: string
       }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
+    | null
+  password?: string | null
+  collection: 'users'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
-  key: string;
+  id: number
+  key: string
   data:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: number
   document?:
     | ({
-        relationTo: 'productos';
-        value: number | Producto;
+        relationTo: 'productos'
+        value: number | Producto
       } | null)
     | ({
-        relationTo: 'piedras';
-        value: number | Piedra;
+        relationTo: 'piedras'
+        value: number | Piedra
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'users'
+        value: number | User
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'media'
+        value: number | Media
+      } | null)
+  globalSlug?: string | null
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  updatedAt: string;
-  createdAt: string;
+    relationTo: 'users'
+    value: number | User
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: number
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  key?: string | null;
+    relationTo: 'users'
+    value: number | User
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: number
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "productos_select".
  */
 export interface ProductosSelect<T extends boolean = true> {
-  nombre?: T;
-  slug?: T;
-  mundo?: T;
-  tipo?: T;
-  precio?: T;
-  stock?: T;
-  estado?: T;
-  destacado?: T;
-  fotos?: T;
-  descripcion?: T;
-  materiales?: T;
-  medidas?: T;
+  nombre?: T
+  slug?: T
+  mundo?: T
+  tipo?: T
+  precio?: T
+  stock?: T
+  estado?: T
+  destacado?: T
+  fotos?: T
+  descripcion?: T
+  materiales?: T
+  medidas?: T
   piedras?:
     | T
     | {
-        piedra?: T;
-        x?: T;
-        y?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
+        piedra?: T
+        x?: T
+        y?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "piedras_select".
  */
 export interface PiedrasSelect<T extends boolean = true> {
-  nombre?: T;
-  slug?: T;
-  color?: T;
-  significado?: T;
-  propiedades?: T;
-  foto?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  nombre?: T
+  slug?: T
+  color?: T
+  significado?: T
+  propiedades?: T
+  foto?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  nombre?: T;
-  rol?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
+  nombre?: T
+  rol?: T
+  updatedAt?: T
+  createdAt?: T
+  email?: T
+  resetPasswordToken?: T
+  resetPasswordExpiration?: T
+  salt?: T
+  hash?: T
+  resetPasswordRequestedAt?: T
+  loginAttempts?: T
+  lockUntil?: T
   sessions?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
+        id?: T
+        createdAt?: T
+        expiresAt?: T
+      }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  _objectKey?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
+  alt?: T
+  _objectKey?: T
+  updatedAt?: T
+  createdAt?: T
+  url?: T
+  thumbnailURL?: T
+  filename?: T
+  mimeType?: T
+  filesize?: T
+  width?: T
+  height?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T;
-  data?: T;
+  key?: T
+  data?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  document?: T
+  globalSlug?: T
+  user?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  user?: T
+  key?: T
+  value?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  batch?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inicio".
  */
 export interface Inicio {
-  id: number;
+  id: number
   /**
    * Foto del bloque amarillo de la home.
    */
-  fotoAccesorios?: (number | null) | Media;
+  fotoAccesorios?: (number | null) | Media
   /**
    * Foto del bloque verde de la home.
    */
-  fotoDeportes?: (number | null) | Media;
+  fotoDeportes?: (number | null) | Media
   /**
    * Frases cortas de la franja verde de arriba de todo. En el celular se ve una a la vez. Si no hay ninguna, la franja no aparece.
    */
   anuncios?:
     | {
-        texto: string;
-        id?: string | null;
+        texto: string
+        id?: string | null
       }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inicio_select".
  */
 export interface InicioSelect<T extends boolean = true> {
-  fotoAccesorios?: T;
-  fotoDeportes?: T;
+  fotoAccesorios?: T
+  fotoDeportes?: T
   anuncios?:
     | T
     | {
-        texto?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        texto?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -511,18 +520,17 @@ export interface InicioSelect<T extends boolean = true> {
  */
 export interface CollectionsWidget {
   data?: {
-    [k: string]: unknown;
-  };
-  width: 'full';
+    [k: string]: unknown
+  }
+  width: 'full'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown;
+  [k: string]: unknown
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
