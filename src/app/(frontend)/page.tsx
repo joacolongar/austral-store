@@ -1,48 +1,75 @@
 import { getPayload } from 'payload'
 import React from 'react'
 
-import { Button, Logo } from '@/components/ui'
+import { BloqueHero } from '@/components/home/BloqueHero'
+import { Novedades, type ProductoNovedad } from '@/components/home/Novedades'
 import config from '@/payload.config'
+import type { Media, Producto } from '@/payload-types'
 
-// Home provisoria (la real llega en #7): muestra las fotos que se suben desde /admin.
-export const dynamic = 'force-dynamic'
+export const metadata = {
+  title: 'Austral Store · Accesorios hechos a mano y deportes',
+  description:
+    'Collares y pulseras únicos con piedras naturales e hilo encerado, y ropa para entrenar al aire libre.',
+}
+
+const DIAS_NUEVO = 30
+
+const aFoto = (media: number | Media | null | undefined) =>
+  media && typeof media === 'object' && media.url ? { url: media.url, alt: media.alt } : null
+
+function aNovedad(p: Producto): ProductoNovedad {
+  const dias = (Date.now() - new Date(p.createdAt).getTime()) / 86_400_000
+  const seccion = p.mundo === 'deportes' ? 'deportes' : 'accesorios'
+  return {
+    id: p.id,
+    nombre: p.nombre,
+    precio: p.precio,
+    href: `/${seccion}/${p.slug ?? p.id}`,
+    mundo: p.mundo,
+    foto: aFoto(p.fotos?.[0]) ?? undefined,
+    badge: p.mundo === 'bijouterie' ? 'Pieza única' : dias <= DIAS_NUEVO ? 'Nuevo' : undefined,
+    vendida: p.estado === 'vendida',
+  }
+}
 
 export default async function HomePage() {
   const payload = await getPayload({ config: await config })
-  const media = await payload.find({ collection: 'media', limit: 12, sort: '-createdAt' })
+  const [inicio, productos] = await Promise.all([
+    payload.findGlobal({ slug: 'inicio', depth: 1 }),
+    payload.find({
+      collection: 'productos',
+      where: { estado: { not_equals: 'borrador' } },
+      sort: ['-destacado', '-createdAt'],
+      limit: 24,
+      depth: 1,
+      overrideAccess: false,
+    }),
+  ])
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12 sm:px-8">
-      <header>
-        <p className="text-xs font-semibold tracking-etiqueta text-acento uppercase">Prototipo</p>
-        <h1 className="mt-3">
-          <Logo className="w-64 sm:w-96" />
-        </h1>
-        <p className="mt-3">Las fotos que se suben desde el panel aparecen acá.</p>
-        <Button className="mt-5" href="/admin">
-          Ir al panel
-        </Button>
-      </header>
-
-      <section
-        aria-label="Últimas fotos"
-        className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
-      >
-        {media.docs.length === 0 && <p>Todavía no hay fotos. Subí una desde el panel.</p>}
-        {media.docs.map((doc) =>
-          doc.url ? (
-            <figure className="overflow-hidden rounded-card bg-superficie p-3" key={doc.id}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt={doc.alt}
-                className="aspect-square w-full rounded-foto object-cover"
-                src={doc.url}
-              />
-              <figcaption className="pt-2.5 text-sm">{doc.alt}</figcaption>
-            </figure>
-          ) : null,
-        )}
-      </section>
+    <main>
+      <h1 className="sr-only">Austral Store: accesorios hechos a mano y deportes</h1>
+      <div className="mx-auto grid max-w-[1440px] gap-3 px-4 pt-1 pb-6 sm:px-10 sm:pt-2 lg:grid-cols-2 lg:gap-5">
+        <BloqueHero
+          boton="Ver accesorios"
+          bajada="Collares y pulseras únicos, con piedras naturales e hilo encerado. Cada piedra cuenta algo."
+          etiqueta="01 · Hecho a mano"
+          foto={aFoto(inicio.fotoAccesorios)}
+          href="/accesorios"
+          titulo={['Accesorios', 'con significado']}
+          tono="detalle"
+        />
+        <BloqueHero
+          boton="Ver deportes"
+          bajada="Ropa y accesorios para entrenar, correr y moverte al aire libre."
+          etiqueta="02 · Austral Sport"
+          foto={aFoto(inicio.fotoDeportes)}
+          href="/deportes"
+          titulo={['Deportes', 'para el verano']}
+          tono="primario"
+        />
+      </div>
+      <Novedades productos={productos.docs.map(aNovedad)} />
     </main>
   )
 }

@@ -26,7 +26,7 @@ export const Productos: CollectionConfig = {
   admin: {
     useAsTitle: 'nombre',
     group: 'Productos',
-    defaultColumns: ['nombre', 'mundo', 'tipo', 'precio', 'estado'],
+    defaultColumns: ['nombre', 'mundo', 'tipo', 'precio', 'estado', 'destacado'],
     listSearchableFields: ['nombre'],
   },
   access: {
@@ -109,6 +109,12 @@ export const Productos: CollectionConfig = {
         { label: 'Vendida', value: 'vendida' },
       ],
       admin: { position: 'sidebar' },
+    },
+    {
+      name: 'destacado',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: { position: 'sidebar', description: 'Aparece primero en las novedades de la home.' },
     },
     {
       name: 'fotos',

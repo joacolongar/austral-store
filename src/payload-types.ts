@@ -157,6 +157,10 @@ export interface Producto {
   stock: number
   estado: 'borrador' | 'disponible' | 'vendida'
   /**
+   * Aparece primero en las novedades de la home.
+   */
+  destacado?: boolean | null
+  /**
    * La primera es la principal.
    */
   fotos: (number | Media)[]
@@ -355,6 +359,7 @@ export interface ProductosSelect<T extends boolean = true> {
   precio?: T
   stock?: T
   estado?: T
+  destacado?: T
   fotos?: T
   descripcion?: T
   materiales?: T
@@ -473,6 +478,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Inicio {
   id: number
   /**
+   * Foto del bloque amarillo de la home.
+   */
+  fotoAccesorios?: (number | null) | Media
+  /**
+   * Foto del bloque verde de la home.
+   */
+  fotoDeportes?: (number | null) | Media
+  /**
    * Frases cortas de la franja verde de arriba de todo. En el celular se ve una a la vez. Si no hay ninguna, la franja no aparece.
    */
   anuncios?:
@@ -489,6 +502,8 @@ export interface Inicio {
  * via the `definition` "inicio_select".
  */
 export interface InicioSelect<T extends boolean = true> {
+  fotoAccesorios?: T
+  fotoDeportes?: T
   anuncios?:
     | T
     | {
