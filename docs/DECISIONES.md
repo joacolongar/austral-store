@@ -2,6 +2,10 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-012 · Deportes en "Próximamente", foco en Accesorios (2026-11-28)
+- **Decisión (joaco):** por ahora solo se lanza la sección Accesorios. Deportes se muestra como "Próximamente": bloque de la home sin botón, página `/deportes` con aviso y sin productos de deportes en Novedades. Se controla con `secciones` en `src/config/marca.ts`.
+- **Consecuencias:** el #8 (catálogo y ficha de Deportes) pasa a Fase 3. Las novedades filtran por tipo de pieza (collares, pulseras, aros, tobilleras). Las fotos de campaña de accesorios que mandó joaco quedan como default en `public/campana/` hasta que se cargue una en el panel.
+
 ## DEC-011 · Compresión de fotos con Cloudflare Images (2026-11-27)
 - **Decisión:** hook `beforeOperation` en `media` que pasa cada foto por el binding `IMAGES` de Cloudflare Images: máximo 2000 px de lado, WebP calidad 80. Se guarda solo la versión comprimida en R2.
 - **Alternativas:** comprimir en el navegador (frágil con el uploader de Payload), WASM en el Worker (pesa y suma CPU), sharp (no corre en Workers).

@@ -26,3 +26,25 @@ export const navegacion = {
     { texto: 'Botón de arrepentimiento', href: '/arrepentimiento' },
   ],
 }
+
+/**
+ * Secciones activas de la tienda. Deportes queda en "Próximamente" hasta que se lance
+ * (decisión de joaco, 2026-11-28): no se muestran sus productos y /deportes avisa que viene pronto.
+ */
+export const secciones = {
+  accesorios: true,
+  deportes: false,
+}
+
+/** Fotos de campaña por defecto (las mandó joaco). Si en el panel se carga una foto en Inicio, se usa esa. */
+export const campanaAccesorios = [
+  {
+    url: '/campana/collar-puesto.webp',
+    alt: 'Collar de piedras naturales con dije de estrella, puesto',
+  },
+  {
+    url: '/campana/collar-fluorita.webp',
+    alt: 'Collar de chips de fluorita y amatista sobre tela azul',
+  },
+  { url: '/campana/pulsera-luck.webp', alt: 'Pulsera de ágata negra con dije "Luck"' },
+]
