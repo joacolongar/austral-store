@@ -2,6 +2,12 @@
 
 > Una entrada por decisión, la más nueva arriba. Formato: contexto, decisión, alternativas descartadas, consecuencias. Si una decisión se reemplaza, marcala como "Reemplazada por DEC-n" en vez de borrarla.
 
+## DEC-013 · Filtro por color deducido de las piedras (2026-11-28)
+- **Contexto:** el #9 pide filtrar el catálogo por color, pero la pieza no tiene campo de color.
+- **Decisión:** el color de una pieza son las familias de color de sus piedras (violetas, rosas, verdes, azules, blancos…), calculadas a partir del `#RRGGBB` de cada piedra en `src/lib/colores.ts`. La editora no carga nada extra.
+- **Alternativas:** un campo "color" en Producto (más carga para la editora y se puede contradecir con las piedras).
+- **Consecuencias:** si una pieza no tiene piedras marcadas, no aparece en el filtro de color ni de piedra (sí en "Todo" y por tipo). Los filtros quedan en la URL (`?tipo=…&piedra=…&color=…`), así la página de cada piedra puede enlazar al catálogo filtrado.
+
 ## DEC-012 · Deportes en "Próximamente", foco en Accesorios (2026-11-28)
 - **Decisión (joaco):** por ahora solo se lanza la sección Accesorios. Deportes se muestra como "Próximamente": bloque de la home sin botón, página `/deportes` con aviso y sin productos de deportes en Novedades. Se controla con `secciones` en `src/config/marca.ts`.
 - **Consecuencias:** el #8 (catálogo y ficha de Deportes) pasa a Fase 3. Las novedades filtran por tipo de pieza (collares, pulseras, aros, tobilleras). Las fotos de campaña de accesorios que mandó joaco quedan como default en `public/campana/` hasta que se cargue una en el panel.

@@ -5,7 +5,8 @@ import { BloqueHero } from '@/components/home/BloqueHero'
 import { Novedades, type ProductoNovedad } from '@/components/home/Novedades'
 import { campanaAccesorios, secciones } from '@/config/marca'
 import config from '@/payload.config'
-import type { Media, Producto } from '@/payload-types'
+import { aFoto } from '@/lib/catalogo'
+import type { Producto } from '@/payload-types'
 
 export const metadata = {
   title: 'Austral Store · Accesorios hechos a mano y deportes',
@@ -14,9 +15,6 @@ export const metadata = {
 }
 
 const DIAS_NUEVO = 30
-
-const aFoto = (media: number | Media | null | undefined) =>
-  media && typeof media === 'object' && media.url ? { url: media.url, alt: media.alt } : null
 
 function aNovedad(p: Producto): ProductoNovedad {
   const dias = (Date.now() - new Date(p.createdAt).getTime()) / 86_400_000

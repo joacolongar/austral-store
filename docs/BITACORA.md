@@ -4,14 +4,14 @@
 
 ## Estado actual
 - **Fase:** 1 · Catálogo
-- **Trabajando en:** Deportes en "Próximamente" y fotos de campaña (rama `feat/deportes-proximamente`, PR abierto). #7 mergeado y publicado.
+- **Trabajando en:** #9 Catálogo de accesorios y Guía de piedras (rama `feat/9-catalogo-accesorios`, PR abierto).
 - **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: mergear el PR de Deportes "Próximamente".
-2. #9 Catálogo de accesorios y Guía de piedras (`/accesorios`, `/accesorios/piedras`).
-3. Después: #10 ficha interactiva, #11 editor de puntos, #12 lanzamiento. #8 (Deportes) quedó en Fase 3 (DEC-012).
+1. joaco: revisar y mergear el PR del #9.
+2. #10 Ficha interactiva de la pieza (`/accesorios/<slug>`; hoy las cards del catálogo llevan ahí y dan 404).
+3. Después: #11 editor de puntos, #12 lanzamiento. #8 (Deportes) en Fase 3 (DEC-012).
 4. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue piezas y las 15 piedras.
 5. Preview por PR, pendiente dentro de #3.
 
@@ -21,6 +21,12 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-28 · #9 Catálogo de accesorios y Guía de piedras
+- `/accesorios`: banner amarillo del Figma, grilla 2/3/4 columnas, filtros por tipo (pills), por piedra y por color (paneles que se abren abajo). Solo se ofrecen opciones que tienen piezas. Primero las disponibles, las vendidas al final con badge "Vendida"; el resto "Pieza única". Abajo, "Cada piedra tiene su historia" con todas las piedras.
+- `/accesorios/piedras`: guía completa. `/accesorios/piedras/<slug>`: color, significado, propiedades, foto si hay, piezas que la llevan (o botón de WhatsApp si no hay) y chips a otras piedras.
+- Color de la pieza deducido de sus piedras (DEC-013). Test en `tests/int/colores.int.spec.ts`.
+- Consultas públicas en `src/lib/consultas.ts` (siempre `overrideAccess: false`, sin borradores).
 
 ### 2026-11-28 · Deportes "Próximamente" y foco en Accesorios
 - Pedido de joaco: solo se mueve Accesorios por ahora (DEC-012). #8 pasado a Fase 3 con comentario.
