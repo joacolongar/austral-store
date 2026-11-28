@@ -4,16 +4,15 @@
 
 ## Estado actual
 - **Fase:** 1 · Catálogo
-- **Trabajando en:** #10 Ficha interactiva de la pieza (rama `feat/10-ficha-pieza`, PR abierto). #9 mergeado.
+- **Trabajando en:** #11 Editor de puntos en el panel (rama `feat/11-editor-puntos`, PR abierto). #10 mergeado.
 - **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: revisar y mergear el PR del #10.
-2. #11 Editor de puntos en el panel (marcar las piedras tocando la foto, hoy se cargan x/y a mano).
-3. #12 Lanzamiento. #8 (Deportes) en Fase 3 (DEC-012).
-4. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue piezas y las 15 piedras.
-5. Preview por PR, pendiente dentro de #3.
+1. joaco: revisar y mergear el PR del #11.
+2. #12 Lanzamiento. #8 (Deportes) en Fase 3 (DEC-012).
+3. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue piezas y las 15 piedras.
+4. Preview por PR, pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro). Con el dominio se suma el email de contacto al footer.
@@ -21,6 +20,11 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-28 · #11 Editor de puntos en el panel
+- Campo `ui` `marcarPiedras` en Productos (solo accesorios), antes del array `piedras`: muestra la foto principal, tocar suma un punto, se elige la piedra con chips (con buscador si hay más de 8), los números se arrastran y "Borrar punto" lo saca. Escribe en el array `piedras` (x/y en %, 1 decimal), que queda abajo como "Piedras en la foto (en números)" para ajuste fino.
+- La foto del editor usa el mismo recorte cuadrado que la ficha de la web, así los % coinciden con lo que ve el cliente.
+- Probado en celular (iPhone 13) con usuario editora: sumar 3 puntos, elegir piedras, arrastrar, borrar, guardar y recargar. La ficha pública muestra los puntos en el mismo lugar.
 
 ### 2026-11-28 · #10 Ficha interactiva de la pieza
 - `/accesorios/<slug>` según "Ficha collar" del Figma: galería (deslizable en celular con puntitos, miniaturas en compu), puntos que laten sobre la foto principal en las posiciones x/y cargadas, tarjeta de la piedra elegida (con link "Más piezas con…"), tira "Este collar lleva", materiales, medidas y cuidados, y la guía de piedras abajo.

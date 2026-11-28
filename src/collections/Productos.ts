@@ -138,13 +138,22 @@ export const Productos: CollectionConfig = {
       ],
     },
     {
+      // Editor visual (#11): tocar la foto para marcar cada piedra. Escribe en `piedras`.
+      name: 'marcarPiedras',
+      type: 'ui',
+      admin: {
+        condition: (data) => data?.mundo === 'bijouterie',
+        components: { Field: '@/components/admin/MarcarPiedras#MarcarPiedras' },
+      },
+    },
+    {
       name: 'piedras',
-      label: 'Piedras en la foto',
+      label: 'Piedras en la foto (en números)',
       type: 'array',
       admin: {
         condition: (data) => data?.mundo === 'bijouterie',
         description:
-          'Cada piedra de la pieza y dónde está en la foto principal (en % desde arriba a la izquierda).',
+          'Se completa solo al marcar la foto de arriba. Acá podés ajustar la posición fina (en % desde arriba a la izquierda).',
         initCollapsed: true,
       },
       fields: [

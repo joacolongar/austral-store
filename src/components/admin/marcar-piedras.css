@@ -1,0 +1,198 @@
+/* Editor de puntos (#11). Colores de la marca, como en selector-seccion.css (DEC-005). */
+.marcar-piedras {
+  --as-primario: #02462e;
+  --as-sobre-primario: #fffdf6;
+  --as-superficie: #e6efe9;
+  --as-detalle: #fec700;
+  --as-acento: #f25f5c;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.marcar-piedras__titulo {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.marcar-piedras__vacio {
+  margin: 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--as-superficie);
+  color: var(--as-primario);
+  font-size: 14px;
+}
+
+.marcar-piedras__marco {
+  position: relative;
+  max-width: 520px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--as-superficie);
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.marcar-piedras__marco img {
+  /* Mismo recorte cuadrado que la ficha de la web: así los % coinciden con lo que ve el cliente. */
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.marcar-piedras__punto {
+  position: absolute;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--as-sobre-primario);
+  border-radius: 999px;
+  background: var(--as-primario);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: grab;
+  touch-action: none;
+  transform: translate(-50%, -50%);
+}
+
+.marcar-piedras__punto[data-sin-piedra] {
+  border-style: dashed;
+}
+
+.marcar-piedras__punto[data-elegido] {
+  background: var(--as-acento);
+  outline: 3px solid rgb(242 95 92 / 0.35);
+}
+
+.marcar-piedras__ayuda {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgb(255 253 246 / 0.9);
+  color: var(--as-primario);
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.marcar-piedras__lista,
+.marcar-piedras__opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marcar-piedras__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 16px 8px 10px;
+  border: 1px solid var(--as-primario);
+  border-radius: 999px;
+  background: var(--as-superficie);
+  color: var(--as-primario);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.marcar-piedras__chip[data-elegido] {
+  border: 2px solid var(--as-acento);
+  padding: 7px 15px 7px 9px;
+}
+
+.marcar-piedras__chip b {
+  font-weight: 700;
+}
+
+.marcar-piedras__color {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1px solid rgb(2 70 46 / 0.25);
+  border-radius: 999px;
+}
+
+.marcar-piedras__falta {
+  color: var(--as-acento);
+  font-weight: 600;
+}
+
+.marcar-piedras__tarjeta {
+  display: flex;
+  max-width: 520px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 2px solid var(--as-acento);
+  border-radius: 14px;
+  color: var(--as-primario);
+}
+
+.marcar-piedras__tarjeta-cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.marcar-piedras__tarjeta-cabeza p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.marcar-piedras__borrar,
+.marcar-piedras__listo {
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.marcar-piedras__borrar {
+  border-color: var(--as-acento);
+  color: var(--as-acento);
+}
+
+.marcar-piedras__listo {
+  align-self: flex-end;
+  border-color: var(--as-primario);
+  background: var(--as-primario);
+  color: var(--as-sobre-primario);
+}
+
+.marcar-piedras__buscar {
+  padding: 10px 12px;
+  border: 1px solid var(--as-primario);
+  border-radius: 10px;
+  background: var(--as-superficie);
+  color: var(--as-primario);
+  font-size: 15px;
+}
