@@ -4,14 +4,14 @@
 
 ## Estado actual
 - **Fase:** 1 · Catálogo
-- **Trabajando en:** #9 Catálogo de accesorios y Guía de piedras (rama `feat/9-catalogo-accesorios`, PR abierto).
+- **Trabajando en:** #10 Ficha interactiva de la pieza (rama `feat/10-ficha-pieza`, PR abierto). #9 mergeado.
 - **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: revisar y mergear el PR del #9.
-2. #10 Ficha interactiva de la pieza (`/accesorios/<slug>`; hoy las cards del catálogo llevan ahí y dan 404).
-3. Después: #11 editor de puntos, #12 lanzamiento. #8 (Deportes) en Fase 3 (DEC-012).
+1. joaco: revisar y mergear el PR del #10.
+2. #11 Editor de puntos en el panel (marcar las piedras tocando la foto, hoy se cargan x/y a mano).
+3. #12 Lanzamiento. #8 (Deportes) en Fase 3 (DEC-012).
 4. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue piezas y las 15 piedras.
 5. Preview por PR, pendiente dentro de #3.
 
@@ -21,6 +21,12 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-28 · #10 Ficha interactiva de la pieza
+- `/accesorios/<slug>` según "Ficha collar" del Figma: galería (deslizable en celular con puntitos, miniaturas en compu), puntos que laten sobre la foto principal en las posiciones x/y cargadas, tarjeta de la piedra elegida (con link "Más piezas con…"), tira "Este collar lleva", materiales, medidas y cuidados, y la guía de piedras abajo.
+- Supuesto: todavía no hay bolsa ni Mercado Pago, así que el botón principal es "Comprar por WhatsApp" (mensaje con nombre, precio y link). En celular va en una barra fija abajo y el botón flotante de WhatsApp sube para no taparla. Sin "3 cuotas" porque las promesas comerciales no están definidas.
+- Vendida: badge "Vendida", precio tachado, sin barra de compra y botón "Pedir una parecida por WhatsApp". Borradores dan 404.
+- Test de Playwright en celular (`tests/e2e/ficha.e2e.spec.ts`), crea y borra sus propios datos. Corre con `pnpm test:e2e` sobre una base local nueva.
 
 ### 2026-11-28 · #9 Catálogo de accesorios y Guía de piedras
 - `/accesorios`: banner amarillo del Figma, grilla 2/3/4 columnas, filtros por tipo (pills), por piedra y por color (paneles que se abren abajo). Solo se ofrecen opciones que tienen piezas. Primero las disponibles, las vendidas al final con badge "Vendida"; el resto "Pieza única". Abajo, "Cada piedra tiene su historia" con todas las piedras.

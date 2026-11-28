@@ -47,3 +47,16 @@ export async function buscarPiedra(slug: string) {
   })
   return docs[0] ?? null
 }
+
+/** Una pieza de accesorios por su slug (los borradores no se ven si no hay sesión). */
+export async function buscarPieza(slug: string) {
+  const payload = await getPayload({ config: await config })
+  const { docs } = await payload.find({
+    collection: 'productos',
+    where: { and: [{ slug: { equals: slug } }, { mundo: { equals: 'bijouterie' } }] },
+    limit: 1,
+    depth: 2,
+    overrideAccess: false,
+  })
+  return docs[0] ?? null
+}

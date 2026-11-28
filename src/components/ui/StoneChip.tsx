@@ -7,12 +7,21 @@ type StoneChipProps = {
   /** Color de la piedra, lo carga la editora en el panel. */
   color: string
   activa?: boolean
+  /** Borde sandía, como la piedra elegida en la ficha del Figma. */
+  resaltada?: boolean
   onClick?: () => void
   className?: string
 }
 
 /** Chip de piedra del Figma: círculo con el color de la piedra + nombre. */
-export function StoneChip({ nombre, color, activa = false, onClick, className }: StoneChipProps) {
+export function StoneChip({
+  nombre,
+  color,
+  activa = false,
+  resaltada = false,
+  onClick,
+  className,
+}: StoneChipProps) {
   const contenido = (
     <>
       <span
@@ -24,7 +33,8 @@ export function StoneChip({ nombre, color, activa = false, onClick, className }:
     </>
   )
   const clases = cn(
-    'inline-flex items-center gap-2 rounded-full border border-texto py-2 pr-4 pl-2.5 text-sm leading-none font-medium text-texto',
+    'inline-flex items-center gap-2 rounded-full py-2 pr-4 pl-2.5 text-sm leading-none font-medium text-texto',
+    resaltada ? 'border-2 border-acento' : 'border border-texto',
     activa ? 'bg-detalle' : 'bg-superficie',
     onClick && 'transition-colors hover:bg-detalle/40',
     className,
@@ -32,7 +42,7 @@ export function StoneChip({ nombre, color, activa = false, onClick, className }:
 
   if (onClick) {
     return (
-      <button aria-pressed={activa} className={clases} onClick={onClick} type="button">
+      <button aria-pressed={activa || resaltada} className={clases} onClick={onClick} type="button">
         {contenido}
       </button>
     )
