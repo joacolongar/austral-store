@@ -4,16 +4,16 @@
 
 ## Estado actual
 - **Fase:** 1 · Catálogo
-- **Trabajando en:** #7 home de marca (rama `feat/7-home`, PR abierto). #6 mergeado.
+- **Trabajando en:** Deportes en "Próximamente" y fotos de campaña (rama `feat/deportes-proximamente`, PR abierto). #7 mergeado y publicado.
 - **Bloqueos:** ninguno.
 - **Supuestos vigentes:** venta en Argentina (Mercado Pago, envíos locales). Lanzamiento con compra por WhatsApp (5492665011054).
 
 ## Próximos pasos
-1. joaco: mergear el PR de #7. El deploy carga 3 frases genéricas en la cinta (si está vacía) y suma las fotos de campaña en Inicio.
-2. Cargar las fotos de campaña (Inicio → Editar inicio) y algunos productos para que la home se vea completa.
-3. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue las 15 piedras.
-4. #8 Catálogo y ficha de Deportes.
-5. Quedan de la Fase 1: #8 a #12. De la Fase 0, el preview por PR dentro de #3.
+1. joaco: mergear el PR de Deportes "Próximamente".
+2. #9 Catálogo de accesorios y Guía de piedras (`/accesorios`, `/accesorios/piedras`).
+3. Después: #10 ficha interactiva, #11 editor de puntos, #12 lanzamiento. #8 (Deportes) quedó en Fase 3 (DEC-012).
+4. Crear el usuario de la editora (Ajustes → Usuarios) y que cargue piezas y las 15 piedras.
+5. Preview por PR, pendiente dentro de #3.
 
 ## Pendientes de joaco
 - Dominio elegido (australstore.com.ar / austral.store / otro). Con el dominio se suma el email de contacto al footer.
@@ -21,6 +21,13 @@
 - Lista inicial de piedras con su significado (la arma la editora).
 
 ## Sesiones
+
+### 2026-11-28 · Deportes "Próximamente" y foco en Accesorios
+- Pedido de joaco: solo se mueve Accesorios por ahora (DEC-012). #8 pasado a Fase 3 con comentario.
+- Home: bloque Deportes con "Próximamente" y sin botón; Novedades solo de accesorios, con filtros por tipo (solo los tipos que tienen piezas). Página `/deportes` con aviso, link a accesorios y botón de WhatsApp.
+- Fotos de campaña de joaco en `public/campana/` (WebP, 1200 px, sin EXIF): collar puesto, collar de fluorita y pulsera "Luck". Se ven en el bloque de Accesorios (una grande y dos chicas) mientras no haya foto cargada en Inicio.
+- Variantes nuevas de `Button`: `detalle` ya estaba; se suma `secundarioClaro` para fondo verde.
+- Ojo: la cinta tiene la frase genérica "Accesorios artesanales y deportes"; se puede cambiar desde Inicio.
 
 ### 2026-11-27 · #7 Home de marca
 - Hero con dos bloques (Accesorios amarillo, Deportes verde) según el Figma, con foto de campaña editable en Inicio (`fotoAccesorios`, `fotoDeportes`). Sin foto muestra el placeholder.

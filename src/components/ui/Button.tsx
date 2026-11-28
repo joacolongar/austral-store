@@ -3,7 +3,7 @@ import React from 'react'
 
 import { cn } from './cn'
 
-type Variante = 'primario' | 'secundario' | 'detalle'
+type Variante = 'primario' | 'secundario' | 'detalle' | 'secundarioClaro'
 
 const base =
   'inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-[15px] leading-none font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50'
@@ -13,6 +13,9 @@ const variantes: Record<Variante, string> = {
   secundario: 'border-[1.5px] border-texto text-texto hover:bg-superficie',
   /** Amarillo sobre fondo verde (bloque Deportes de la home). */
   detalle: 'bg-detalle text-texto hover:bg-detalle/90',
+  /** Borde claro, para usar sobre fondo verde. */
+  secundarioClaro:
+    'border-[1.5px] border-sobre-primario text-sobre-primario hover:bg-sobre-primario/10',
 }
 
 type Comunes = { variante?: Variante; className?: string; children: React.ReactNode }
