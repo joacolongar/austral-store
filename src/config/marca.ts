@@ -48,3 +48,6 @@ export const campanaAccesorios = [
   },
   { url: '/campana/pulsera-luck.webp', alt: 'Pulsera de ágata negra con dije "Luck"' },
 ]
+
+/** Cuidados que se muestran en la ficha de cada accesorio. */
+export const cuidadosAccesorios = 'Evitar agua, perfumes y cremas. Guardar en un lugar seco.'

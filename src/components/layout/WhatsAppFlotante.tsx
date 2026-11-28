@@ -7,6 +7,7 @@ export function WhatsAppFlotante() {
   return (
     <a
       aria-label="Escribinos por WhatsApp"
+      data-whatsapp-flotante
       className="fixed right-4 bottom-4 z-50 grid size-[52px] place-items-center rounded-full bg-whatsapp text-white shadow-lg transition-transform hover:scale-105 sm:right-6 sm:bottom-6 sm:size-[60px]"
       href={linkWhatsApp()}
       rel="noopener"
